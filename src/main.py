@@ -37,7 +37,7 @@ async def get_all_teams():
 
 
 @app.post("/matches/", response_model=FootballMatch)
-async def create_match(home_team_id: UUID, away_team_id: UUID, score: str, match_date : str , match_start_time: str):
+async def create_match(home_team_id: UUID, away_team_id: UUID, score: str, match_date : datetime):
     home_team_doc = db.teams.find_one({"team_id": str(home_team_id)})
     away_team_doc = db.teams.find_one({"team_id": str(away_team_id)})
 
@@ -51,8 +51,8 @@ async def create_match(home_team_id: UUID, away_team_id: UUID, score: str, match
 
     ## TODO take match_date and match_start_time and send it as time and date in match_data
     now = datetime.now()
-    date_str = now.strftime("%Y-%m-%d")
-    time_str = now.strftime("%H:%M") 
+    date_str = match_date.strftime("%Y-%m-%d")
+    time_str = match_date.strftime("%H:%M") 
 
     match_data = {
         "match_id": str(uuid.uuid4()),
