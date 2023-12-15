@@ -1,7 +1,8 @@
 from pymongo import MongoClient
+import os
 
 # Připojovací řetězec
-uri = "mongodb+srv://admin:admindb@footballmatchesdb.ywjx4tg.mongodb.net/?retryWrites=true&w=majority"
+uri = os.getenv("MONGODB_URL")
 
 # Vytvoření klienta MongoDB
 client = MongoClient(uri)

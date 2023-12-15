@@ -1,6 +1,6 @@
 [project]
 name = "football-match-api"
-version = "0.2.0"
+version = "1.0.0"
 description = "Football match API"
 authors = [
     {name = "Kleveta", email = "kleveta.lukas99@gmail.com"},
