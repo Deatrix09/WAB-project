@@ -8,7 +8,7 @@ class FootballMatch(BaseModel):
     match_id : UUID
     home_team: Team
     away_team: Team
-    score: str
     date: date
     time: time
+    status: str
 
