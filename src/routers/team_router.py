@@ -67,7 +67,7 @@ async def create_team(name: str, founded: int, city: str, stadium: str, current_
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 
 @team_router.delete("/deleteTeam/{team_id}", status_code=202)
-async def delete_team(team_id: UUID,current_user: TokenData = Depends(validate_token)):
+async def delete_team(team_id: UUID, current_user: TokenData = Depends(validate_token)):
     try:
         str_team_id = str(team_id)
         deleted = db.teams.delete_one({"team_id": str_team_id})
@@ -75,7 +75,11 @@ async def delete_team(team_id: UUID,current_user: TokenData = Depends(validate_t
         if deleted.deleted_count == 0:
             raise HTTPException(status_code=404, detail="Team not found")
 
+        success_message = "Team successfully deleted"
+        status_code = 202
+
     except Exception as e:
         raise HTTPException(status_code=404, detail="Team not found")
 
-    return "Team successfully deleted"
+    return {"message": success_message, "status_code": status_code}
+
