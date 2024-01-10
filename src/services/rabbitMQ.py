@@ -9,7 +9,7 @@ def send_player_created_message(player_data):
 
     channel.queue_declare(queue='player_created')
 
-    # Předpokládáme, že player_data má atribut 'name'
+    
     message = f"New player registered - {player_data['name']}"
 
     channel.basic_publish(exchange='',
