@@ -7,4 +7,16 @@ services:
       - "8000:8000"
     environment:
       - MONGODB_URL=mongodb+srv://admin:admindb@footballmatchesdb.ywjx4tg.mongodb.net/?retryWrites=true&w=majority
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
     command: sh -c "pdm run uvicorn main:app --host 0.0.0.0 --port 8000"
+    depends_on:
+      - rabbitmq  
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    ports:
+      - "5672:5672" 
+      - "15672:15672"  
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
